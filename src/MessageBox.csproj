@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <UseWPF>true</UseWPF>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ErrorDialog.xaml" />
+    <None Remove="res\fonts\14 Segment LED.ttf" />
+    <None Remove="res\fonts\14SegmentLED.ttf" />
+    <None Remove="res\fonts\62DRAGZ.otf" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDM2B__.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDM2L__.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDM2N__.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDM2U__.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDMB___.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDML___.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDMN___.TTF" />
+    <None Remove="res\fonts\LCDMonoWinTT\LCDMU___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD-BOLD.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD-L___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD-N___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD-U___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD2B___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD2L___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD2N___.TTF" />
+    <None Remove="res\fonts\LCDWinTT\LCD2U___.TTF" />
+    <None Remove="SuccessDialog.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\fonts\14SegmentLED.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\62DRAGZ.otf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDM2B__.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDM2L__.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDM2N__.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDM2U__.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDMB___.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDML___.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDMN___.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDMonoWinTT\LCDMU___.TTF">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD-BOLD.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD-L___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD-N___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD-U___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD2B___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD2L___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD2N___.TTF" />
+    <Resource Include="res\fonts\LCDWinTT\LCD2U___.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WarningDialog.xaml" />
+  </ItemGroup>
+</Project>
