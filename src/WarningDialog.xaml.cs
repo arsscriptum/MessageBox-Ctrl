@@ -20,16 +20,31 @@ namespace MessageBox
     public partial class WarningDialog : Window
     {
         public string Message { get; set; }
+        private string intruderSoundResource = "pack://application:,,,/MessageBox;component/res/sounds/intruder.wav";
+        System.Media.SoundPlayer _internal_player = null;
+
         public WarningDialog(string message, string title)
         {
             InitializeComponent();
-            Message = message;
-            Title = title;
+            MessageText.Text = message;
+            TitleText.Text = title;
             DataContext = this;
+
+            Uri uri = new Uri(intruderSoundResource, UriKind.Absolute);
+            var streamInfo = Application.GetResourceStream(uri);
+            if (streamInfo != null)
+            {
+                _internal_player = new System.Media.SoundPlayer(streamInfo.Stream);
+                _internal_player.PlayLooping();
+            }
         }
 
         public void OK_Click(object sender, RoutedEventArgs e)
         {
+            if (_internal_player != null)
+            {
+                _internal_player.Stop();
+            }
             this.DialogResult = true;
             this.Close();
         }
