@@ -1,3 +1,3 @@
-# Download Manager Controller
+# A WARNING DIALOG
 
-![demo](img/demo.gif)
+![demo](img/dialog.png)
