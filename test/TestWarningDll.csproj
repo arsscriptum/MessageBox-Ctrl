@@ -13,8 +13,8 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FastDownloader">
-      <HintPath>..\libs\Debug\FastDownloader.dll</HintPath>
+    <Reference Include="MessageBox">
+      <HintPath>..\libs\Debug\MessageBox.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

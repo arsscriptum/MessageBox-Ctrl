@@ -17,8 +17,8 @@ namespace MessageBox
         {
             var app = System.Windows.Application.Current ?? new System.Windows.Application();
             app.ShutdownMode = ShutdownMode.OnMainWindowClose;
-            var win = new MessageBox.WarningDialog(message, title);
-         
+            var win = new MessageBox.WarningDialog();
+            win.ShowWarningDialogWithSound(message, title);
             app.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             // This ensures closing win will shutdown app
