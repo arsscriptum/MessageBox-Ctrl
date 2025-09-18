@@ -34,7 +34,7 @@ $BuildPath = Join-Path $ProjectPath "src"
 $BinPath = Join-Path $BuildPath "bin"
 $ObjPath = Join-Path $BuildPath "obj"
 $ArtifactsPath = Join-Path $BuildPath "artifacts"
-$DeployFinalPath = "C:\Dev\packages-vault\libs\FastDownload-Ctrl"
+$DeployFinalPath = "C:\Dev\packages-vault\libs\MessageBox-Ctrl"
 
 
 if ($Clean) {
@@ -106,7 +106,7 @@ while (BuildsRemaining) {
     StartBuild $BuildRequest
 }
 
-[System.Management.Automation.PathInfo]$pi = Resolve-Path -Path "libs\FastDownload-Ctrl" -RelativeBasePath "..\.." -ErrorAction Ignore
+[System.Management.Automation.PathInfo]$pi = Resolve-Path -Path "libs\MessageBox-Ctrl" -RelativeBasePath "..\.." -ErrorAction Ignore
 if (($pi) -and ($pi.Path)) {
     $DestinationDeployPath = $pi.Path
 

@@ -230,7 +230,7 @@ function Reset-ProjectRegistrySettings {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false, Position = 0)]
-        [string]$ProjectName = "FastDownload-Ctrl"
+        [string]$ProjectName = "MessageBox-Ctrl"
     )
     try {
         Write-ProjectPathProperties -ProjectName "$ProjectName" $Script:ProjectSettingsToSave
@@ -243,12 +243,12 @@ function Initialize-ProjectRegistrySettings {
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory = $false, Position = 0)]
-        [string]$ProjectName = "FastDownload-Ctrl"
+        [string]$ProjectName = "MessageBox-Ctrl"
     )
     Read-ProjectPathProperties -ProjectName "$ProjectName"
 }
 
 if($Reset){
-    Reset-ProjectRegistrySettings "FastDownload-Ctrl"
-    Initialize-ProjectRegistrySettings "FastDownload-Ctrl"
+    Reset-ProjectRegistrySettings "MessageBox-Ctrl"
+    Initialize-ProjectRegistrySettings "MessageBox-Ctrl"
 }

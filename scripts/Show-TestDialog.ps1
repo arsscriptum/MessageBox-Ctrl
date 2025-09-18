@@ -1,4 +1,4 @@
-﻿
+
 
 
 function Show-WarningDllDialog {
@@ -8,7 +8,7 @@ function Show-WarningDllDialog {
     Add-Type -AssemblyName PresentationCore
 
     
-    $ctrl = New-Object MessageBox.WarningDialog -ArgumentList "Temperature has reached 100","WARNING"
+    $ctrl = New-Object MessageBox.WarningDialog
     $ctrl.ShowDialog()
 
 }
