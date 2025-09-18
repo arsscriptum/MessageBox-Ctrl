@@ -13,54 +13,43 @@
         <Border.Effect>
             <DropShadowEffect BlurRadius="24" ShadowDepth="0" Color="Black" Opacity="0.7"/>
         </Border.Effect>
-        <Grid>
-            <!-- Close button (top right X) -->
-            <Button x:Name="btnClose"
-                    Width="32" Height="32"
-                    HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Margin="0,4,4,0"
-                    Background="Transparent"
-                    BorderBrush="{x:Null}" BorderThickness="0"
-                    Cursor="Hand"
-                    ToolTip="Close">
-                <TextBlock Text="✕" FontSize="16" Foreground="White" FontWeight="Bold"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Button>
-            <StackPanel VerticalAlignment="Center" Margin="0,28,0,0">
-                <!-- Title -->
-                <TextBlock x:Name="TitleText"
-                           Text="WARNING"
-                           FontSize="32"
-                           FontFamily="pack://application:,,,/MessageBox;component/res/fonts/#62DRAGZ"
-                           Foreground="#FFFFEB3B" FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           Margin="0,6,0,14"/>
-                <!-- Message Section -->
-                <Border CornerRadius="8" Margin="30,0,30,0"
-                        Background="#FFFF8888"  BorderBrush="#FFFFB4B4" BorderThickness="1">
-                    <TextBlock x:Name="MessageText"
-                               Text="Message goes here"
-                               FontSize="18"
-                               FontFamily="pack://application:,,,/MessageBox;component/res/fonts/LCDWinTT/#LCD"
+        <Grid Height="256" VerticalAlignment="Top">
 
-                               Foreground="White"
-                               TextAlignment="Center"
-                               Margin="14,8"
-                               TextWrapping="Wrap"/>
+            <StackPanel VerticalAlignment="Center" Height="222" >
+                <TextBlock x:Name="TitleText"
+               Text="WARNING"
+               FontSize="36"
+               FontFamily="pack://application:,,,/MessageBox;component/res/fonts/#62DRAGZ"
+               Foreground="#FFFFEB3B"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"
+               Margin="0,6,0,16"/>
+                <Border CornerRadius="12" Margin="30,20,30,0"
+            Background="#FFFF8888" BorderBrush="#FFFFB4B4" BorderThickness="1">
+                    <TextBlock x:Name="MessageText"
+                   Text=""
+                   FontSize="14"
+                   FontFamily="pack://application:,,,/MessageBox;component/res/fonts/LCDWinTT/#LCD"
+                   Foreground="White"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   MaxWidth="350"
+                   Height="70"
+                   Padding="18,10"/>
                 </Border>
-                <!-- OK button -->
                 <Button x:Name="btnOk"
-                        Width="100" Height="32" Content="OK"
-                        Background="#FFB71C1C"
-                        Foreground="White"
-                        FontWeight="SemiBold"
-                        BorderBrush="{x:Null}" BorderThickness="0"
-                        Cursor="Hand"
-                        FontFamily="pack://application:,,,/res/fonts/LCDWinTT\#LCD"
-                        HorizontalAlignment="Center"
-                        Margin="0,18,0,0"
-                        Click="OK_Click"/>
+            Width="89" Height="28" Content="GOT IT"
+            Background="#FFB71C1C"
+            Foreground="White"
+            FontWeight="SemiBold"
+            BorderBrush="{x:Null}" BorderThickness="0"
+            Cursor="Hand"
+            FontFamily="pack://application:,,,/MessageBox;component/res/fonts/LCDWinTT/#LCD"
+            HorizontalAlignment="Center"
+            Margin="0,32,0,0"
+            Click="OK_Click"/>
             </StackPanel>
+
         </Grid>
     </Border>
 </Window>
