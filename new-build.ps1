@@ -20,11 +20,6 @@ param(
     [Alias("i")]
     [switch]$Init
 )
-if (($Debug) -and ($Release)) {
-    Write-Host "[ERROR] " -n -f DarkRed
-    Write-Host "You cannot use both Debug and Release flag." -f DarkYellow
-    return -1;
-}
 
 $ProjectPath = (Resolve-Path -Path "$PSScriptRoot").Path
 $scriptsPath = Join-Path $ProjectPath "scripts"

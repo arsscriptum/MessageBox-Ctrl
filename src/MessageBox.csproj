@@ -69,7 +69,30 @@
     <Resource Include="res\fonts\LCDWinTT\LCD2L___.TTF" />
     <Resource Include="res\fonts\LCDWinTT\LCD2N___.TTF" />
     <Resource Include="res\fonts\LCDWinTT\LCD2U___.TTF" />
+    <Resource Include="res\fonts\14SegmentLED.ttf" />
+    <Resource Include="res\fonts\AmpedTTF.ttf" />
+    <Resource Include="res\fonts\Audiowide-Regular.ttf" />
+    <Resource Include="res\fonts\Dune_Rise.ttf" />
+    <Resource Include="res\fonts\whitrabt.ttf" />
+    <Resource Include="res\sounds\28_54.WAV">
+    <Resource Include="res\sounds\AirgapOff.wav">
+    <Resource Include="res\sounds\alert1.wav">
+    <Resource Include="res\sounds\alert2.wav">
+    <Resource Include="res\sounds\alertvoice.wav">
+    <Resource Include="res\sounds\AnomalyDetected.wav">
+    <Resource Include="res\sounds\CivilEmergency.wav">
+    <Resource Include="res\sounds\Digital.wav">
     <Resource Include="res\sounds\intruder.wav">
+    <Resource Include="res\sounds\LifeSupportSysFailure.wav">
+    <Resource Include="res\sounds\ManualOverrideInit.wav">
+    <Resource Include="res\sounds\MechanicalSiren.wav">
+    <Resource Include="res\sounds\NukeAlert.wav">
+    <Resource Include="res\sounds\Ringing.wav">
+    <Resource Include="res\sounds\SystemError.wav">
+    <Resource Include="res\sounds\TempAlert.wav">
+    <Resource Include="res\sounds\tornadoSiren.wav">
+    <Resource Include="res\sounds\tornadoSirenLong.wav">
+    <Resource Include="res\sounds\VideoGameAlarm.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
