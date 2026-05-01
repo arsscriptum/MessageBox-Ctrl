@@ -23,7 +23,7 @@ namespace MessageBox
     public partial class WarningDialog : Window
     {
         public string Message { get; set; }
-        private string intruderSoundResource = "pack://application:,,,/MessageBox;component/res/sounds/intruder.wav";
+        private string intruderSoundResource = "pack://application:,,,/MessageBox;component/res/sounds/LifeSupportSysFailure.wav";
         MediaPlayer _internal_player = null;
         System.Media.SoundPlayer _internal_sound_player = null;
         public WarningDialog()
@@ -42,7 +42,7 @@ namespace MessageBox
             if (streamInfo != null)
             {
                 // In your dialog class:
-                string tempWav = ExtractWavToTempFile("pack://application:,,,/MessageBox;component/res/sounds/intruder.wav");
+                string tempWav = ExtractWavToTempFile("pack://application:,,,/MessageBox;component/res/sounds/LifeSupportSysFailure.wav");
                 if (tempWav != null)
                 {
                     _internal_player = new MediaPlayer();

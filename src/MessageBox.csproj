@@ -7,6 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="DuneDialog.xaml" />
     <None Remove="ErrorDialog.xaml" />
     <None Remove="res\fonts\14 Segment LED.ttf" />
     <None Remove="res\fonts\14SegmentLED.ttf" />
@@ -30,10 +31,7 @@
     <None Remove="res\sounds\intruder.wav" />
     <None Remove="SuccessDialog.xaml" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="res\fonts\14SegmentLED.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+ <ItemGroup>
     <Resource Include="res\fonts\62DRAGZ.otf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -61,37 +59,99 @@
     <Resource Include="res\fonts\LCDMonoWinTT\LCDMU___.TTF">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="res\fonts\LCDWinTT\LCD-BOLD.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD-L___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD-N___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD-U___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD2B___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD2L___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD2N___.TTF" />
-    <Resource Include="res\fonts\LCDWinTT\LCD2U___.TTF" />
-    <Resource Include="res\fonts\14SegmentLED.ttf" />
-    <Resource Include="res\fonts\AmpedTTF.ttf" />
-    <Resource Include="res\fonts\Audiowide-Regular.ttf" />
-    <Resource Include="res\fonts\Dune_Rise.ttf" />
-    <Resource Include="res\fonts\whitrabt.ttf" />
-    <Resource Include="res\sounds\28_54.WAV">
+    <Resource Include="res\fonts\LCDWinTT\LCD-BOLD.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD-L___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD-N___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD-U___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD2B___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD2L___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD2N___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\LCDWinTT\LCD2U___.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\14SegmentLED.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\AmpedTTF.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\Audiowide-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\Dune_Rise.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\whitrabt.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\sounds\28_54.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\AirgapOff.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\alert1.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\alert2.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\alertvoice.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\AnomalyDetected.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\CivilEmergency.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\Digital.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\intruder.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\LifeSupportSysFailure.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\ManualOverrideInit.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\MechanicalSiren.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\NukeAlert.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\Ringing.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\SystemError.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\TempAlert.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\tornadoSiren.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\tornadoSirenLong.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\sounds\VideoGameAlarm.wav">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -101,6 +161,7 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DuneDialog.xaml" />
     <Page Include="WarningDialog.xaml" />
   </ItemGroup>
 </Project>
