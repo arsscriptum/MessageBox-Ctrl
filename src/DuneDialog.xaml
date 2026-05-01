@@ -26,7 +26,7 @@
                 <TextBlock x:Name="TitleText"
                            Text="ALERT"
                            FontSize="34"
-                           FontFamily="pack://application:,,,/MessageBox;component/res/fonts/#Dune_Rise"
+                           FontFamily="pack://application:,,,/MessageBox;component/res/fonts/#Dream MMA"
                            Foreground="#FF4ECDC4"
                            HorizontalAlignment="Center"
                            Margin="0,8,0,14">

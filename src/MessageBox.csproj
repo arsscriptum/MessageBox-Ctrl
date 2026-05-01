@@ -92,6 +92,9 @@
     <Resource Include="res\fonts\Audiowide-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="res\fonts\DreamMMA.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="res\fonts\Dune_Rise.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
