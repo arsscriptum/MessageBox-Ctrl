@@ -23,12 +23,12 @@ namespace MessageBox
             app.Run(win);
         }
 
-        public static void ShowDuneDialog(string message, string title, AlertSound sound, double volume = 0.3)
+        public static void ShowDuneDialog(string message, string title, AlertSound sound, DialogStyle style = DialogStyle.Normal, double volume = 0.3)
         {
             var app = System.Windows.Application.Current ?? new System.Windows.Application();
             app.ShutdownMode = ShutdownMode.OnMainWindowClose;
             var win = new MessageBox.DuneDialog();
-            win.ShowWithSound(message, title, sound, volume);
+            win.ShowWithSound(message, title, sound, style, volume);
             app.ShutdownMode = ShutdownMode.OnMainWindowClose;
             app.MainWindow = win;
             app.Run(win);

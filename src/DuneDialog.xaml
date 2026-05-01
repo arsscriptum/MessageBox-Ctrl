@@ -9,7 +9,7 @@
         WindowStyle="None"
         Background="Transparent">
 
-    <Border Margin="10" CornerRadius="4" BorderThickness="1"
+    <Border x:Name="OuterBorder" Margin="10" CornerRadius="4" BorderThickness="1"
             BorderBrush="#FF4ECDC4" Padding="0"
             Background="#CC0A0F1A">
         <Border.Effect>
@@ -18,8 +18,7 @@
 
         <Grid Height="276" VerticalAlignment="Top">
 
-            <!-- top accent bar -->
-            <Rectangle Height="2" VerticalAlignment="Top"
+            <Rectangle x:Name="TopBar" Height="2" VerticalAlignment="Top"
                        Fill="#FF4ECDC4" Margin="0,0,0,0"/>
 
             <StackPanel VerticalAlignment="Center" Height="236">
@@ -37,7 +36,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
 
-                <Border CornerRadius="2" Margin="30,10,30,0"
+                <Border x:Name="MessageBorder" CornerRadius="2" Margin="30,10,30,0"
                         Background="#1A4ECDC4" BorderBrush="#664ECDC4" BorderThickness="1">
                     <TextBlock x:Name="MessageText"
                                Text=""
@@ -93,8 +92,7 @@
 
             </StackPanel>
 
-            <!-- bottom accent bar -->
-            <Rectangle Height="2" VerticalAlignment="Bottom"
+            <Rectangle x:Name="BottomBar" Height="2" VerticalAlignment="Bottom"
                        Fill="#FF4ECDC4" Margin="0,0,0,0"/>
         </Grid>
     </Border>
