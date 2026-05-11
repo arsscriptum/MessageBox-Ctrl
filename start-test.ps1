@@ -10,10 +10,29 @@
 #║   Code licensed under the GNU GPL v3.0. See the LICENSE file for details.      ║
 #╚════════════════════════════════════════════════════════════════════════════════╝
 
+[CmdletBinding(SupportsShouldProcess)]
+param(
+    [Parameter(Mandatory = $false)]
+    [Alias("rel", "r")]
+    [switch]$Release,
+    [Parameter(Mandatory = $false)]
+    [Alias("c")]
+    [switch]$Clean,
+    [Parameter(Mandatory = $false)]
+    [Alias("i")]
+    [switch]$Init
+)
 
+$Target = "Debug"
 
+if ($Release) {
+    $Target = "Release"
+} else {
+    $Target = "Debug"
+}
 
-$ProjectPath = (Resolve-Path -PAth "$PSScriptRoot").Path
+$ProjectPath = (Resolve-Path -Path "$PSScriptRoot").Path
+$scriptsPath = Join-Path $ProjectPath "scripts"
 $libsPath = Join-Path $ProjectPath "libs"
 $BuildPath = Join-Path $ProjectPath "src"
 $BinPath = Join-Path $BuildPath "bin"

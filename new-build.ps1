@@ -23,14 +23,20 @@ param(
 
 $ProjectPath = (Resolve-Path -Path "$PSScriptRoot").Path
 $scriptsPath = Join-Path $ProjectPath "scripts"
+$testPath = Join-Path $ProjectPath "test"
 $CommonScriptPath = Join-Path $scriptsPath "Common.ps1"
 $libsPath = Join-Path $ProjectPath "libs"
 $BuildPath = Join-Path $ProjectPath "src"
 $BinPath = Join-Path $BuildPath "bin"
 $ObjPath = Join-Path $BuildPath "obj"
 $ArtifactsPath = Join-Path $BuildPath "artifacts"
-$DeployFinalPath = "C:\Dev\packages-vault\libs\MessageBox-Ctrl"
+$TestArtifactsPath = Join-Path $testPath "artifacts"
 
+$DevRootPath = (Resolve-Path -Path "$PSScriptRoot\..").Path
+$PackageVaultProjectPath = Join-Path $DevRootPath "packages-vault"
+$DeployFinalPath = "$PackageVaultProjectPath\libs\MessageBox-Ctrl"
+$ProjectPathBinPath = Join-Path $ProjectPath "bin"
+$AllDeployPaths = @($TestArtifactsPath,$DeployFinalPath,$libsPath)
 
 if ($Clean) {
     Write-Host "=========================================================" -f DarkGray
@@ -46,9 +52,12 @@ if ($Clean) {
 }
 
 Write-Host "=========================================================" -f DarkGray
-Write-Host "  CREATING DEPLOY PATH  ...`n" -f Yellow
-Write-Host "  ✔️ $DeployFinalPath " -f Blue
-New-Item -Path "$DeployFinalPath" -ItemType Directory -Force -EA Ignore | Out-Null
+Write-Host "  CREATING DEPLOY PATHS  ...`n" -f Yellow
+ForEach($dp in $AllDeployPaths){
+   Write-Host "  ✔️ $dp " -f Blue
+   New-Item -Path "$dp" -ItemType Directory -Force -EA Ignore | Out-Null    
+}
+
 Write-Host "=========================================================" -f DarkGray
 
 if ($Release) {
@@ -90,10 +99,11 @@ Write-Host "=========================================================" -f DarkGr
 Write-Host " Initialization Completed!...`n" -f Blue
 Write-Host "  ✔️  Creating a NEW BUILD REQUEST $BuildInfo" -f Blue
 
-$request2 = New-BuildRequest -WorkingDirectory "$BuildPath" -ProjectFilePath "MessageBox.csproj" -Architecture "win-x64" -OutputPath "bin" -DeployPath "$libsPath" -ArtifactsPath "artifacts" -Configuration "$Target" -Framework "net472" -Version "1.0.1" -LogLevel Normal -Owner "gp"
+$request2 = New-BuildRequest -WorkingDirectory "$BuildPath" -ProjectFilePath "MessageBox.csproj" -Architecture "win-x64" -OutputPath "$BinPath\$Target" -DeployPaths $AllDeployPaths -ArtifactsPath "artifacts" -Configuration "$Target" -Framework "net472" -Version "1.0.1" -LogLevel Normal -Owner "gp"
 
 $request2.AddProperty("LOGGING_ENABLED", "true")
 
+$request3 = New-BuildRequest -WorkingDirectory "$testPath" -ProjectFilePath "TestWarningDll.csproj" -Architecture "win-x64" -OutputPath "$ENV:Programs\MessageBox-Ctrl" -ArtifactsPath "artifacts" -Configuration "$Target" -Framework "net472" -Version "1.0.1" -LogLevel Normal -Buil -Owner "gp" -Type Publish
 
 while (BuildsRemaining) {
     $BuildRequest = Get-NextBuildRequest
@@ -101,9 +111,9 @@ while (BuildsRemaining) {
     StartBuild $BuildRequest
 }
 
-[System.Management.Automation.PathInfo]$pi = Resolve-Path -Path "libs\MessageBox-Ctrl" -RelativeBasePath "..\.." -ErrorAction Ignore
-if (($pi) -and ($pi.Path)) {
-    $DestinationDeployPath = $pi.Path
+
+<#
+    $DestinationDeployPath = Join-Path "$ENV:Programs" "MessageBox-Ctrl"
 
     Write-Host "=========================================================" -f DarkGray
     Write-Host " DEPLOYING BINARIES TO MAIN SOLUTION $DestinationDeployPath`n" -f DarkYellow
@@ -125,15 +135,20 @@ if (($pi) -and ($pi.Path)) {
         Copy-Item "$fn" "$DestinationDeployPath" -Force
     }
 
+#>
+
+
+$ToClean = @()
+$BuildPathsToClean = @("$(Join-Path $ProjectPath "src")","$(Join-Path $ProjectPath "test")")
+$BuildPathsToClean | % {
+ # $ToClean += Join-Path "$_" "bin"
+  $ToClean += Join-Path "$_" "obj"
+  $ToClean += Join-Path "$_" "artifacts"
 }
-
-
+Remove-Item -Path "$ToClean" -Recurse -Force -ErrorAction Ignore | Out-Null
 
 Write-Host "=========================================================" -f DarkGray
 Write-Host "  CLEANING UP BUILD FILES ...`n" -f White
-Write-Host "  ✔️ $BinPath " -f DarkCyan
-Write-Host "  ✔️ $ObjPath " -f DarkCyan
-Write-Host "  ✔️ $ArtifactsPath " -f DarkCyan
-Remove-Item -Path "$BinPath" -Recurse -Force -ErrorAction Ignore | Out-Null
-Remove-Item -Path "$ObjPath" -Recurse -Force -ErrorAction Ignore | Out-Null
-Remove-Item -Path "$ArtifactsPath" -Recurse -Force -ErrorAction Ignore | Out-Null
+$ToClean | % {
+    Write-Host "  ✔️ $_ " -f DarkCyan
+}

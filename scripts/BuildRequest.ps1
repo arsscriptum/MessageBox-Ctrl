@@ -7,16 +7,21 @@ enum BuildVerbosity {
     Diagnostic = 4
 }
 
+enum BuildType {
+    Build = 0
+    Publish = 1
+}
+
+
 class BuildRequest {
     static [uint32] $NextBuildId = 1
-
     [uint32]$BuildId
     [string]$GUID
     [string]$WorkingDirectory
     [string]$ProjectFilePath
     [string]$Architecture
     [string]$OutputPath
-    [string]$DeployPath
+    [string[]]$DeployPaths
     [string]$ArtifactsPath
     [string]$Configuration
     [string]$Framework
@@ -25,6 +30,7 @@ class BuildRequest {
     [bool]$RedirectStdOut
     [bool]$RedirectStdErr
     [BuildVerbosity]$LogLevel
+    [BuildType]$Type
     [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string,string]]]$MsBuildProperties = [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string,string]]]::new()
     [string]$Owner
     [uint64]$Created
@@ -36,21 +42,23 @@ class BuildRequest {
         [string]$ProjectFilePath,
         [string]$Architecture,
         [string]$OutputPath,
-        [string]$DeployPath,
+        [string[]]$DeployPaths,
         [string]$ArtifactsPath,
         [string]$Configuration,
         [string]$Framework,
         [string]$Version,
         [BuildVerbosity]$LogLevel = [BuildVerbosity]::Normal,
+        [BuildType]$Type = [BuildType]::Build,
         [string]$Owner = ""
     ) {
         $this.BuildId = [BuildRequest]::NextBuildId++
+        $this.Type = $Type
         $this.GUID = [guid]::NewGuid().ToString()
         $this.WorkingDirectory = $WorkingDirectory
         $this.ProjectFilePath = $ProjectFilePath
         $this.Architecture = $Architecture
         $this.OutputPath = $OutputPath
-        $this.DeployPath = $DeployPath
+        $this.DeployPaths = $DeployPaths
         $this.ArtifactsPath = $ArtifactsPath
         $this.Configuration = $Configuration
         $this.Framework = $Framework
@@ -59,6 +67,7 @@ class BuildRequest {
         $this.RedirectStdOut = $false
         $this.RedirectStdErr = $false
         $this.LogLevel = $LogLevel
+        $this.Type = $Type
         $this.MsBuildProperties = [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string,string]]]::new()
         $this.Owner = $Owner
         $this.Created = [uint64]( [math]::Floor((Get-Date).ToUniversalTime().Subtract([datetime]'1970-01-01').TotalSeconds) )

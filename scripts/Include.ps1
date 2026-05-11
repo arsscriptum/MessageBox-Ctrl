@@ -200,6 +200,7 @@ function Invoke-BuildRequest {
 
     $regPath = "HKCU:\SOFTWARE\arsscriptum\development\powershell\buildsystem"
     $dotnetPath = (Get-ItemProperty -Path $regPath -Name "DotNetPath").DotNetPath
+    $UseBuildArguments = $True
 
     if (-not $BuildRequest) {
         $RequestsRemaining = Test-BuildRequestsRemaining
@@ -210,21 +211,40 @@ function Invoke-BuildRequest {
         $BuildRequest = Get-NextBuildRequest
     }
 
-    $OutPath = Join-Path "$($BuildRequest.WorkingDirectory)" "$($BuildRequest.OutputPath)"
-    $OutPath = Join-Path "$OutPath" "$($BuildRequest.Configuration)"
-    $RealDeployPath = Join-Path "$($BuildRequest.DeployPath)" "$($BuildRequest.Configuration)"
-
+    #$OutPath = Join-Path "$($BuildRequest.WorkingDirectory)" "$($BuildRequest.OutputPath)"
+    #$OutPath = Join-Path "$OutPath" "$($BuildRequest.Configuration)"
+    $OutPath = "$($BuildRequest.OutputPath)"
+    $dotNetCmd = 'build'
+    if($BuildRequest.Type -eq [BuildType]::Build){
+        $dotNetCmd = 'build'
+        $UseBuildArguments = $True
+    } else {
+        $dotNetCmd = 'publish'
+        $UseBuildArguments = $False
+    }
     Out-BuildProperty "Build ID" "$($BuildRequest.BuildId)"
+    Out-BuildProperty "Build Type" "$($BuildRequest.Type)"
     Out-BuildProperty "GUID" "$($BuildRequest.GUID)"
     Out-BuildProperty "Working Directory" "$($BuildRequest.WorkingDirectory)"
     Out-BuildProperty "Project File" "$($BuildRequest.ProjectFilePath)"
     Out-BuildProperty "Architecture" "$($BuildRequest.Architecture)"
     Out-BuildProperty "Output Path" "$($BuildRequest.OutputPath)"
-    Out-BuildProperty "Deploy Path" "$RealDeployPath"
     Out-BuildProperty "Configuration" "$($BuildRequest.Configuration)"
     Out-BuildProperty "Framework" "$($BuildRequest.Framework)"
     Out-BuildProperty "Version" "$($BuildRequest.Version)"
     Out-BuildProperty "Log Level" "$($BuildRequest.LogLevel)"
+    $AllDeployPaths = $BuildRequest.DeployPaths
+    if($AllDeployPaths -ne $Null){
+       $AllDeployPathsCount = $AllDeployPaths.Count
+       Out-BuildProperty "Num Deploy dirs" "$AllDeployPathsCount"
+       $i=1
+       ForEach($p in $AllDeployPaths){
+          Out-BuildProperty "Deploy to " "$p"
+          $i++
+       }
+    }
+    
+
     $BuildRequest.MsBuildProperties | Out-MsBuildProperties
 
     # Clean output path if requested
@@ -233,21 +253,21 @@ function Invoke-BuildRequest {
         Remove-Item -Path $OutPath -Recurse -Force -ErrorAction SilentlyContinue
     }
 
-    $args = @('build', "$($BuildRequest.ProjectFilePath)")
+    $args = @("$dotNetCmd", "$($BuildRequest.ProjectFilePath)")
     if ($BuildRequest.Architecture) { $args += @('--arch', $BuildRequest.Architecture) }
     if ($BuildRequest.ArtifactsPath) { $args += @('--artifacts-path', $BuildRequest.ArtifactsPath) }
     if ($BuildRequest.Configuration) { $args += @('-c', $BuildRequest.Configuration) }
     if ($BuildRequest.Framework) { $args += @('-f', $BuildRequest.Framework) }
     if ($OutPath) { $args += @('-o', $OutPath) }
-    if ($BuildRequest.Version) { $args += @('-p:Version=' + $BuildRequest.Version) }
-    if ($BuildRequest.MsBuildProperties.Count -gt 0) {
+    if (($BuildRequest.Version) -And ($UseBuildArguments)) { $args += @('-p:Version=' + $BuildRequest.Version) }
+    if(($BuildRequest.MsBuildProperties.Count -gt 0) -And ($UseBuildArguments)) {
         $propList = $BuildRequest.MsBuildProperties | ForEach-Object { "$($_.Key)=$($_.Value)" }
         $args += @("-p:" + ($propList -join ";"))
     }
-    if ($BuildRequest.LogLevel) {
+    if(($BuildRequest.LogLevel) -And ($UseBuildArguments)) {
         $args += @('-v', "$($BuildRequest.LogLevel)")
     }
-    if (-not $BuildRequest.Incremental) {
+    if((-not $BuildRequest.Incremental) -And ($UseBuildArguments)) {
         $args += '--no-incremental'
     }
 
@@ -286,18 +306,15 @@ function Invoke-BuildRequest {
     }
 
     $roboExe = (get-command "robocopy").Source
-    if (Test-Path "$OutPath") {
-        Write-Host "Files in OutputPath ($OutPath):" -ForegroundColor Blue
-        Get-ChildItem -Path $OutPath -Recurse | ForEach-Object {
-            $fn = "$($_.FullName)"
-            Write-Host "  $relative" -ForegroundColor White -n
-            Write-Host " copy to `"$RealDeployPath`"" -f DarkCyan
-
-            $relative = $fn.Substring($OutPath.Length).TrimStart('\', '/')
-
-        }
+    Write-Host "=========================================================" -f DarkGray
+    Write-Host "  CREATING DEPLOY PATHS  ...`n" -f Yellow
+    ForEach($dp in $AllDeployPaths){
+       Write-Host "  ✔️ $dp " -f Blue
+       New-Item -Path "$dp" -ItemType Directory -Force -EA Ignore | Out-Null    
+        & "$roboExe" "$OutPath" "$p" * /E /NFL /NDL /NJH /NJS /NC /NS /NP /R:20 /W:5     
     }
-    & "$roboExe" "$OutPath" "$RealDeployPath" * /E /NFL /NDL /NJH /NJS /NC /NS /NP /R:20 /W:5
+
+    Write-Host "=========================================================" -f DarkGray
 
 }
 

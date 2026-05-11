@@ -7,15 +7,16 @@ function New-BuildRequest {
         [string]$ProjectFilePath,
         [string]$Architecture,
         [string]$OutputPath,
-        [string]$DeployPath,
+        [string[]]$DeployPaths,
         [string]$ArtifactsPath,
         [string]$Configuration,
         [string]$Framework,
         [string]$Version,
         [BuildVerbosity]$LogLevel = [BuildVerbosity]::Normal,
+        [BuildType]$Type = [BuildType]::Build,
         [string]$Owner = ""
     )
-    $request = [BuildRequest]::new($WorkingDirectory, $ProjectFilePath, $Architecture, $OutputPath, $DeployPath, $ArtifactsPath, $Configuration, $Framework, $Version, $LogLevel, $Owner)
+    $request = [BuildRequest]::new($WorkingDirectory, $ProjectFilePath, $Architecture, $OutputPath, $DeployPaths, $ArtifactsPath, $Configuration, $Framework, $Version, $LogLevel, $Type, $Owner)
     $Global:BuildQueue.Enqueue($request)
     return $request
 }
